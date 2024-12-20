@@ -20,7 +20,6 @@ let package = Package(
             dependencies: [
                 "plasma",
                 .product(name: "Testing", package: "swift-testing"),
-                .product(name: "XCTest", package: "XCTest")
             ])
     ]
 )
