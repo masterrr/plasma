@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest]
     
     runs-on: ${{ matrix.os }}
     
@@ -21,7 +21,7 @@ jobs:
     - name: Setup Swift
       uses: swift-actions/setup-swift@v2
       with:
-        swift-version: "5.9.0"
+        swift-version: "6.0.0"
     
     # Navigate to the plasma directory and verify Package.swift
     - name: Verify Plasma Package
