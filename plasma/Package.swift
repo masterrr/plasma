@@ -8,9 +8,6 @@ let package = Package(
             name: "plasma",
             targets: ["plasma"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-testing", branch: "main")
-    ],
     targets: [
         .target(
             name: "plasma",
@@ -19,7 +16,6 @@ let package = Package(
             name: "plasmaTests",
             dependencies: [
                 "plasma",
-                .product(name: "Testing", package: "swift-testing"),
             ])
     ]
 )
