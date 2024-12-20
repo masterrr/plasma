@@ -1,0 +1,53 @@
+# Swift Package Build Workflow for Plasma Project
+name: Swift Plasma Package Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Swift
+      uses: swift-actions/setup-swift@v2
+      with:
+        swift-version: "6.0.0"
+    
+    # Navigate to the plasma directory and verify Package.swift
+    - name: Verify Plasma Package
+      run: |
+        cd plasma
+        if [ ! -f Package.swift ]; then
+          echo "Error: Package.swift not found in plasma directory"
+          exit 1
+        fi
+        pwd
+        ls
+    
+    # Build the Plasma package with verbose output
+    - name: Build Plasma Package
+      run: |
+        cd plasma
+        swift build -v
+    
+    # Run tests with verbose output
+    - name: Run Tests
+      run: |
+        cd plasma
+        swift test -v
+    
+    # Optional: Generate code coverage
+    - name: Generate Code Coverage
+      run: |
+        cd plasma
+        swift test --enable-code-coverage -v
