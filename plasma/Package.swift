@@ -8,12 +8,19 @@ let package = Package(
             name: "plasma",
             targets: ["plasma"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-testing", branch: "main")
+    ],
     targets: [
         .target(
             name: "plasma",
-            dependencies: []),  // Added explicit empty dependencies
+            dependencies: []),
         .testTarget(
             name: "plasmaTests",
-            dependencies: ["plasma"])
+            dependencies: [
+                "plasma",
+                .product(name: "Testing", package: "swift-testing"),
+                .product(name: "XCTest", package: "XCTest")
+            ])
     ]
 )
