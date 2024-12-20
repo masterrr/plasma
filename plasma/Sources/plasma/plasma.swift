@@ -9,7 +9,6 @@ final class PlasmaEngine {
     
     convenience init() {
         self.init(rules: [
-            // Original Liver Function Rule
             PlasmaRule(
                 id: 1,
                 biomarkerIds: [BiomarkerId.alt, BiomarkerId.ast],
@@ -23,7 +22,6 @@ final class PlasmaEngine {
                 importance: 3
             ),
             
-            // Original Diabetes Rule
             PlasmaRule(
                 id: 2,
                 biomarkerIds: [BiomarkerId.glucose, BiomarkerId.hba1c],
@@ -37,7 +35,6 @@ final class PlasmaEngine {
                 importance: 3
             ),
             
-            // Cardiovascular Risk Rule
             PlasmaRule(
                 id: 3,
                 biomarkerIds: [BiomarkerId.ldlCholesterol, BiomarkerId.apoB, BiomarkerId.crp],
