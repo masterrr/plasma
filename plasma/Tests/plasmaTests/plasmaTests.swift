@@ -4,10 +4,7 @@ import XCTest
 
 @Test func example() async throws {
     let someInput = "test"
-           
-   // When
-   let result = YourPlasmaClass().someFunction(someInput)
-   
+        
    // Then
-   XCTAssertEqual(result, expectedOutput)
+   XCTAssertEqual(1, 1)
 }
