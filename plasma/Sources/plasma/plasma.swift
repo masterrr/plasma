@@ -1,7 +1,7 @@
 // plasma.swift
 
 final class PlasmaEngine {
-   111 private let rules: [PlasmaRule]
+    private let rules: [PlasmaRule]
     
     init(rules: [PlasmaRule]) {
         self.rules = rules
