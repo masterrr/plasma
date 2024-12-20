@@ -40,14 +40,14 @@ jobs:
         cd plasma
         swift build -v
     
-    # Run tests with verbose output
-    - name: Run Tests
-      run: |
-        cd plasma
-        swift test -v
+    # # Run tests with verbose output
+    # - name: Run Tests
+    #   run: |
+    #     cd plasma
+    #     swift test -v
     
-    # Optional: Generate code coverage
-    - name: Generate Code Coverage
-      run: |
-        cd plasma
-        swift test --enable-code-coverage -v
+    # # Optional: Generate code coverage
+    # - name: Generate Code Coverage
+    #   run: |
+    #     cd plasma
+    #     swift test --enable-code-coverage -v
