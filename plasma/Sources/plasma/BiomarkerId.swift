@@ -42,4 +42,11 @@ enum BiomarkerId {
     static let egfr = 34
     static let prolactin = 35
     static let shbg = 36
+    static let mch = 37
+    static let absoluteReticulocyte = 38
+    static let rbclDistributionWidthCV = 39
+    static let rbclDistributionWidthSD = 40
+    static let riboflavin = 41
+    static let homocysteine = 42
+
 }
