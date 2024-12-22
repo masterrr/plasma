@@ -324,16 +324,7 @@ final class PlasmaEngine {
                 id: 20,
                 biomarkerIds: [BiomarkerId.mcv, BiomarkerId.hemoglobin, BiomarkerId.mch, BiomarkerId.absoluteRetuclocyte, BiomarkerId.rbc,
                                ],
-                evaluate: { values in
-                    let criticalCount = values.filter { value in
-                        guard let range = value.range else { return false }
-                        return range.isCritical
-                    }.count
-                    let abnormalCount = values.filter { value in
-                        guard let range = value.range else { return false }
-                        return range.isAbnormal || range.isCritical
-                    }.count
-                    return criticalCount > 0 || abnormalCount > 0
+                evaluate: {
                 },
                 message: "Your hormone and binding protein levels require attention. Please consult your healthcare provider for evaluation.",
                 importance: 2
