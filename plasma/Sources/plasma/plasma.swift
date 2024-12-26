@@ -322,9 +322,10 @@ final class PlasmaEngine {
             // Anemia rule
             PlasmaRule(
                 id: 20,
-                biomarkerIds: [BiomarkerId.mcv, BiomarkerId.hemoglobin, BiomarkerId.mch, BiomarkerId.absoluteRetuclocyte, BiomarkerId.rbc,
+                biomarkerIds: [BiomarkerId.mcv, BiomarkerId.hemoglobin, BiomarkerId.mch, BiomarkerId.absoluteReticulocyte, BiomarkerId.rbc,
                                ],
-                evaluate: {
+                evaluate: { values in
+                    return true
                 },
                 message: "Your hormone and binding protein levels require attention. Please consult your healthcare provider for evaluation.",
                 importance: 2
