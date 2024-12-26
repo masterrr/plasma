@@ -325,7 +325,7 @@ final class PlasmaEngine {
                 biomarkerIds: [BiomarkerId.mcv, BiomarkerId.hemoglobin, BiomarkerId.mch, BiomarkerId.absoluteReticulocyte, BiomarkerId.rbc,
                                ],
                 evaluate: { values in
-                    return true
+                    return false
                 },
                 message: "Your hormone and binding protein levels require attention. Please consult your healthcare provider for evaluation.",
                 importance: 2
