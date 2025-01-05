@@ -286,8 +286,8 @@ enum BiomarkerId {
     static let shbg = 71  // POSSIBLE WRONG MAPPING: Same ID as hydroxyprogesterone17
     static let meanCorpuscularHemoglobin = 109
     static let absoluteReticulocyte = 48
-    static let rbclDistributionWidthCV = 101
-    static let rbclDistributionWidthSD = 111
+    static let redBloodCellDistributionWidthCV = 101
+    static let redBloodCellDistributionWidthSD = 111
     static let riboflavin = 41  // POSSIBLE WRONG MAPPING: Maps to apolipoproteinA1 in MetaBiomarker
     static let homocysteine = 6
     static let methylmalonicAcid = 159
