@@ -18,7 +18,8 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your liver enzyme levels require medical attention. Consider lifestyle modifications and consult your healthcare provider.",
+                message:
+                    "Your liver enzyme levels require medical attention. Consider lifestyle modifications and consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -31,7 +32,8 @@ final class PlasmaEngine {
                         return range.isCritical
                     }
                 },
-                message: "Your glucose markers indicate possible diabetes. Please consider lifestyle modifications and consult your healthcare provider for evaluation.",
+                message:
+                    "Your glucose markers indicate possible diabetes. Please consider lifestyle modifications and consult your healthcare provider for evaluation.",
                 importance: 3
             ),
 
@@ -45,7 +47,8 @@ final class PlasmaEngine {
                     }.count
                     return borderlineCount >= 2
                 },
-                message: "Consider coronary calcium scoring and carotid ultrasound for early atherosclerosis detection, even though values are only borderline elevated. Early detection can guide preventive strategies.",
+                message:
+                    "Consider coronary calcium scoring and carotid ultrasound for early atherosclerosis detection, even though values are only borderline elevated. Early detection can guide preventive strategies.",
                 importance: 1
             ),
 
@@ -64,7 +67,8 @@ final class PlasmaEngine {
                     }.count
                     return criticalCount > 0 || abnormalCount >= 2
                 },
-                message: "Consider DEXA scan for detailed body composition analysis and visceral fat assessment. Understanding body composition can guide targeted interventions, even with borderline metabolic markers.",
+                message:
+                    "Consider DEXA scan for detailed body composition analysis and visceral fat assessment. Understanding body composition can guide targeted interventions, even with borderline metabolic markers.",
                 importance: 1
             ),
 
@@ -78,7 +82,8 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Consider DEXA scan for detailed body composition analysis and bone density. Please consider lifestyle modifications and consult your healthcare provider for evaluation.",
+                message:
+                    "Consider DEXA scan for detailed body composition analysis and bone density. Please consider lifestyle modifications and consult your healthcare provider for evaluation.",
                 importance: 1
             ),
 
@@ -93,16 +98,19 @@ final class PlasmaEngine {
                     }.count
                     if criticalCount > 0 { return true }
 
-                    let cortisolDheasAbnormal = values.filter { value in
-                        guard let range = value.range else { return false }
-                        return (value.biomarkerId == BiomarkerId.cortisol ||
-                               value.biomarkerId == BiomarkerId.dheas) &&
-                               (range.isAbnormal || range.isCritical)
-                    }.count == 2
+                    let cortisolDheasAbnormal =
+                        values.filter { value in
+                            guard let range = value.range else { return false }
+                            return
+                                (value.biomarkerId == BiomarkerId.cortisol
+                                || value.biomarkerId == BiomarkerId.dheas)
+                                && (range.isAbnormal || range.isCritical)
+                        }.count == 2
 
                     return cortisolDheasAbnormal
                 },
-                message: "Consider 4-point salivary cortisol testing and comprehensive hormone panel including pregnenolone and melatonin. Diurnal pattern assessment can reveal subtle imbalances even with normal baseline values.",
+                message:
+                    "Consider 4-point salivary cortisol testing and comprehensive hormone panel including pregnenolone and melatonin. Diurnal pattern assessment can reveal subtle imbalances even with normal baseline values.",
                 importance: 1
             ),
 
@@ -116,15 +124,18 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Consider comprehensive micronutrient testing including intracellular mineral analysis and fat-soluble vitamin panel. Achieving optimal levels rather than just normal ranges can support better health outcomes.",
+                message:
+                    "Consider comprehensive micronutrient testing including intracellular mineral analysis and fat-soluble vitamin panel. Achieving optimal levels rather than just normal ranges can support better health outcomes.",
                 importance: 1
             ),
 
             // Extended Liver Health Rule
             PlasmaRule(
                 id: 8,
-                biomarkerIds: [BiomarkerId.alkalinePhosphatase, BiomarkerId.alt,
-                              BiomarkerId.ggt, BiomarkerId.insulin],
+                biomarkerIds: [
+                    BiomarkerId.alkalinePhosphatase, BiomarkerId.alt,
+                    BiomarkerId.ggt, BiomarkerId.insulin,
+                ],
                 evaluate: { values in
                     let criticalCount = values.filter { value in
                         guard let range = value.range else { return false }
@@ -136,7 +147,8 @@ final class PlasmaEngine {
                     }.count
                     return criticalCount > 0 || abnormalCount >= 2
                 },
-                message: "Consider liver elastography and abdominal ultrasound. Early detection of fatty liver can guide lifestyle interventions, even with borderline liver enzyme elevations.",
+                message:
+                    "Consider liver elastography and abdominal ultrasound. Early detection of fatty liver can guide lifestyle interventions, even with borderline liver enzyme elevations.",
                 importance: 1
             ),
 
@@ -155,15 +167,18 @@ final class PlasmaEngine {
                     }.count
                     return criticalCount > 0 || abnormalCount >= 2
                 },
-                message: "Your blood cell measurements indicate possible anemia. Please consult your healthcare provider for evaluation.",
+                message:
+                    "Your blood cell measurements indicate possible anemia. Please consult your healthcare provider for evaluation.",
                 importance: 3
             ),
 
             // Lipid Profile Rule
             PlasmaRule(
                 id: 10,
-                biomarkerIds: [BiomarkerId.cholesterol, BiomarkerId.ldlCholesterol,
-                              BiomarkerId.triglycerides],
+                biomarkerIds: [
+                    BiomarkerId.cholesterol, BiomarkerId.ldlCholesterol,
+                    BiomarkerId.triglycerides,
+                ],
                 evaluate: { values in
                     let criticalCount = values.filter { value in
                         guard let range = value.range else { return false }
@@ -175,7 +190,8 @@ final class PlasmaEngine {
                     }.count
                     return criticalCount > 0 || abnormalCount >= 2
                 },
-                message: "Multiple components of your lipid profile show concerning values. Consider lifestyle changes and consult your healthcare provider.",
+                message:
+                    "Multiple components of your lipid profile show concerning values. Consider lifestyle changes and consult your healthcare provider.",
                 importance: 2
             ),
 
@@ -189,7 +205,8 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your thyroid hormone levels require medical attention. Please consult your healthcare provider for evaluation.",
+                message:
+                    "Your thyroid hormone levels require medical attention. Please consult your healthcare provider for evaluation.",
                 importance: 3
             ),
 
@@ -203,22 +220,26 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your coagulation markers require medical attention! This may indicate a risk of thrombosis! Please consult your healthcare provider.",
+                message:
+                    "Your coagulation markers require medical attention! This may indicate a risk of thrombosis! Please consult your healthcare provider.",
                 importance: 3
             ),
 
             // Bilirubin Rule
             PlasmaRule(
                 id: 13,
-                biomarkerIds: [BiomarkerId.biliTotal, BiomarkerId.biliDirect,
-                              BiomarkerId.biliIndirect, BiomarkerId.ggt],
+                biomarkerIds: [
+                    BiomarkerId.biliTotal, BiomarkerId.biliDirect,
+                    BiomarkerId.biliIndirect, BiomarkerId.ggt,
+                ],
                 evaluate: { values in
                     values.allSatisfy { value in
                         guard let range = value.range else { return false }
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your liver enzyme levels require attention. Consider liver elastography and abdominal ultrasound. Consider lifestyle modifications and consult your healthcare provider.",
+                message:
+                    "Your liver enzyme levels require attention. Consider liver elastography and abdominal ultrasound. Consider lifestyle modifications and consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -232,7 +253,8 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your liver function markers require medical attention! Please consult your healthcare provider. Consider liver elastography and abdominal ultrasound.",
+                message:
+                    "Your liver function markers require medical attention! Please consult your healthcare provider. Consider liver elastography and abdominal ultrasound.",
                 importance: 3
             ),
 
@@ -246,7 +268,8 @@ final class PlasmaEngine {
                         return range == .elevated || range == .criticalAbundance
                     }
                 },
-                message: "Your coagulation markers require medical attention! This may indicate a risk of bleeding! Please consult your healthcare provider.",
+                message:
+                    "Your coagulation markers require medical attention! This may indicate a risk of bleeding! Please consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -260,7 +283,8 @@ final class PlasmaEngine {
                         return range == .deficient || range == .criticalDeficiency
                     }
                 },
-                message: "Your coagulation markers require medical attention! This may indicate a risk of thrombosis! Please consult your healthcare provider.",
+                message:
+                    "Your coagulation markers require medical attention! This may indicate a risk of thrombosis! Please consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -274,7 +298,8 @@ final class PlasmaEngine {
                         return range.isAbnormal || range.isCritical
                     }
                 },
-                message: "Your kidney function markers require medical attention. Please consult your healthcare provider.",
+                message:
+                    "Your kidney function markers require medical attention. Please consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -283,13 +308,15 @@ final class PlasmaEngine {
                 id: 18,
                 biomarkerIds: [BiomarkerId.testosterone, BiomarkerId.prolactin],
                 evaluate: { values in
-                    let testosteroneDeficient = values.first { $0.biomarkerId == BiomarkerId.testosterone }
+                    let testosteroneDeficient =
+                        values.first { $0.biomarkerId == BiomarkerId.testosterone }
                         .flatMap { value in
                             guard let range = value.range else { return false }
                             return range == .deficient || range == .criticalDeficiency
                         } ?? false
 
-                    let prolactinElevated = values.first { $0.biomarkerId == BiomarkerId.prolactin }
+                    let prolactinElevated =
+                        values.first { $0.biomarkerId == BiomarkerId.prolactin }
                         .flatMap { value in
                             guard let range = value.range else { return false }
                             return range == .elevated || range == .criticalAbundance
@@ -297,7 +324,8 @@ final class PlasmaEngine {
 
                     return testosteroneDeficient && prolactinElevated
                 },
-                message: "Your hormone levels show an important interaction that requires medical evaluation. Please consult your healthcare provider.",
+                message:
+                    "Your hormone levels show an important interaction that requires medical evaluation. Please consult your healthcare provider.",
                 importance: 3
             ),
 
@@ -316,9 +344,11 @@ final class PlasmaEngine {
                     }.count
                     return criticalCount > 0 || abnormalCount > 0
                 },
-                message: "Your hormone and binding protein levels require attention. Please consult your healthcare provider for evaluation.",
-                importance: 2
-            )
+                message:
+                    "Your hormone and binding protein levels require attention. Please consult your healthcare provider for evaluation.",
+                importance: 24
+            ),
+
         ])
     }
 
@@ -327,8 +357,8 @@ final class PlasmaEngine {
             let relevantValues = values.filter { rule.biomarkerIds.contains($0.biomarkerId) }
             guard relevantValues.count == rule.biomarkerIds.count else { return nil }
 
-            return rule.evaluate(relevantValues) ?
-                PlasmaOutput(
+            return rule.evaluate(relevantValues)
+                ? PlasmaOutput(
                     message: rule.message,
                     importance: rule.importance,
                     ruleId: rule.id
