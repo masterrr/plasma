@@ -143,7 +143,7 @@ final class PlasmaEngine {
             // Anemia Rule
             PlasmaRule(
                 id: 9,
-                biomarkerIds: [BiomarkerId.hemoglobin, BiomarkerId.rbc, BiomarkerId.mcv],
+                biomarkerIds: [BiomarkerId.hemoglobin, BiomarkerId.rbc, BiomarkerId.meanCorpuscularVolume],
                 evaluate: { values in
                     let criticalCount = values.filter { value in
                         guard let range = value.range else { return false }
