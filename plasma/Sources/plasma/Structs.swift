@@ -27,10 +27,46 @@ struct RuleAuthor: Sendable {
 
 struct PlasmaRule: Sendable {
     let id: Int
-    let references: [Reference] = []
-    let authors: [RuleAuthor] = []
+    let references: [Reference]
+    let authors: [RuleAuthor]
     let biomarkerIds: Set<Int>
     let evaluate: @Sendable ([PlasmaValue]) -> Bool
     let message: String
     let importance: Int
+    
+    // Full constructor with all parameters
+    init(
+        id: Int,
+        references: [Reference],
+        authors: [RuleAuthor],
+        biomarkerIds: Set<Int>,
+        evaluate: @escaping @Sendable ([PlasmaValue]) -> Bool,
+        message: String,
+        importance: Int
+    ) {
+        self.id = id
+        self.references = references
+        self.authors = authors
+        self.biomarkerIds = biomarkerIds
+        self.evaluate = evaluate
+        self.message = message
+        self.importance = importance
+    }
+    
+    // Simplified constructor without references and authors
+    init(
+        id: Int,
+        biomarkerIds: Set<Int>,
+        evaluate: @escaping @Sendable ([PlasmaValue]) -> Bool,
+        message: String,
+        importance: Int
+    ) {
+        self.id = id
+        self.references = []  // Empty array by default
+        self.authors = []     // Empty array by default
+        self.biomarkerIds = biomarkerIds
+        self.evaluate = evaluate
+        self.message = message
+        self.importance = importance
+    }
 }

@@ -1,5 +1,7 @@
 // plasma.swift
 
+let Aksana = RuleAuthor(name: "Aksana")
+
 final class PlasmaEngine {
     private var rules: [PlasmaRule]
 
@@ -11,6 +13,8 @@ final class PlasmaEngine {
         self.init(rules: [
             PlasmaRule(
                 id: 1,
+                references: [Reference(hyperlink: "example.org")],
+                authors: [Aksana],
                 biomarkerIds: [BiomarkerId.alt, BiomarkerId.ast],
                 evaluate: { values in
                     values.allSatisfy { value in
