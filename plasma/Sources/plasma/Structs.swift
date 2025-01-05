@@ -17,8 +17,18 @@ struct PlasmaOutput: Sendable {
     let ruleId: Int
 }
 
+struct Reference: Sendable {
+    let hyperlink: String
+}
+
+struct RuleAuthor: Sendable {
+    let name: String
+}
+
 struct PlasmaRule: Sendable {
     let id: Int
+    let references: [Reference] = []
+    let authors: [RuleAuthor] = []
     let biomarkerIds: Set<Int>
     let evaluate: @Sendable ([PlasmaValue]) -> Bool
     let message: String
