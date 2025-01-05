@@ -685,4 +685,6 @@ final class PlasmaEngine {
                         message: "the results indicate a deficiency in HDL cholesterol or elevated levels of glucose, HbA1c, triglycerides, or LDL cholesterol. The changes in your lab results may indicate metabolic syndrome, increasing the risk for diabetes, cardiovascular disease, and stroke. Consult your physician for a comprehensive evaluation and individualized treatment plan.Adopt a Mediterranean-style diet, rich in fruits, vegetables, lean proteins, and healthy fats, to improve blood sugar and lipid profiles.Monitor your blood pressure levels and try to normalize your BMI. Engage in regular physical activity, aiming for at least 150 minutes of moderate-intensity exercise weekly.If needed, medications like antihypertensives, statins, or antidiabetics may be prescribed to manage individual components. Regular follow-ups to monitor progress are essential.",
                            importance: 3
                     ),
-           
+                ]
+                )}
+        }
