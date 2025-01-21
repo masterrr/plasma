@@ -604,7 +604,7 @@ final class PlasmaEngine {
                     return isElevated && isDeficient
                 },
                 message: "Your test results indicate elevated levels of several key hormones and metabolic markers, which may suggest a condition such as polycystic ovary syndrome (PCOS), metabolic syndrome, or other endocrine or metabolic disorders. Additionally, low levels of SHBG and Follicle Stimulating Hormone (FSH) could indicate an imbalance in your hormonal regulation. We recommend consulting your healthcare provider for a comprehensive evaluation and personalized treatment plan.",
-                importance: 3
+                importance: 2
             ),
             
             // Endocrinology rule
@@ -634,7 +634,7 @@ final class PlasmaEngine {
                     return isElevatedFSH && (isDeficientEstradiol || isDeficientAMH || isDeficientInhibinB)
                 },
                 message: "Your test results show an elevated level of Follicle Stimulating Hormone (FSH), which may indicate diminished ovarian reserve or possible early menopause. Additionally, low levels of estradiol, anti-Müllerian hormone (AMH), or inhibin B may suggest a disruption in ovarian function or hormonal balance. We recommend consulting a healthcare provider for further evaluation and possible treatments.",
-                importance: 3
+                importance: 2
             ),
             // Endocrinology rule hypothyroidism
             PlasmaRule(
@@ -730,10 +730,45 @@ final class PlasmaEngine {
                     return isDeficientTSH && isElevated
                 },
                 message: "Your test results indicate a deficiency in TSH combined with elevated levels of other thyroid and inflammatory biomarkers. This pattern may suggest hyperthyroidism or an underlying inflammatory condition. Please consult with a healthcare provider for further assessment and appropriate management, which may include additional thyroid function tests and evaluation for autoimmune or inflammatory diseases.Be aware of symptoms like weight loss, palpitations, heat intolerance, sweating, tremors, or eye changes and report these to your healthcare provider.Limit iodine intake (e.g., seaweed, iodized salt) and caffeine to manage symptoms like nervousness and palpitations. Maintain a balanced diet with sufficient calories to meet increased metabolic needs.Treatment options may include antithyroid medications, radioactive iodine therapy, or surgery. Follow up regularly to monitor thyroid function and adjust treatment as needed.Practice relaxation techniques such as meditation or yoga to reduce stress, which can exacerbate symptoms. Prioritize regular sleep patterns to manage fatigue.",
-                importance: 3
-            ),            // Metabolic rule
-            PlasmaRule (
+                importance: 2
+            ),
+            // Metabolic rule
+            PlasmaRule(
                 id: 29,
+                biomarkerIds: [
+                    BiomarkerId.glucose,
+                    BiomarkerId.hba1c,
+                    BiomarkerId.triglycerides,
+                    BiomarkerId.hdlCholesterol,
+                    BiomarkerId.ldlCholesterol],
+                evaluate: { values in
+                    // Extract values for each biomarker
+                    let glucose = values.first(where: { $0.biomarkerId == BiomarkerId.glucose })
+                    let hba1c = values.first(where: { $0.biomarkerId == BiomarkerId.hba1c })
+                    let triglycerides = values.first(where: { $0.biomarkerId == BiomarkerId.triglycerides })
+                    let hdl = values.first(where: { $0.biomarkerId == BiomarkerId.hdlCholesterol })
+                    let ldl = values.first(where: { $0.biomarkerId == BiomarkerId.ldlCholesterol })
+                    
+                    // Check if HDL Cholesterol is deficient
+                    let isHDLDeficient = hdl?.range == .deficient
+                    
+                    // Check if other biomarkers are elevated
+                    let isEvaluated = (
+                        glucose?.range == .elevated ||
+                        hba1c?.range == .elevated ||
+                        triglycerides?.range == .elevated ||
+                        ldl?.range == .elevated
+                    )
+                    
+                    // Return true if HDL is deficient or if other biomarkers are elevated
+                    return isHDLDeficient || isEvaluated
+                },
+                message: "the results indicate a deficiency in HDL cholesterol or elevated levels of glucose, HbA1c, triglycerides, or LDL cholesterol. The changes in your lab results may indicate metabolic syndrome, increasing the risk for diabetes, cardiovascular disease, and stroke. Consult your physician for a comprehensive evaluation and individualized treatment plan.Adopt a Mediterranean-style diet, rich in fruits, vegetables, lean proteins, and healthy fats, to improve blood sugar and lipid profiles.Monitor your blood pressure levels and try to normalize your BMI. Engage in regular physical activity, aiming for at least 150 minutes of moderate-intensity exercise weekly.If needed, medications like antihypertensives, statins, or antidiabetics may be prescribed to manage individual components. Regular follow-ups to monitor progress are essential.",
+                importance: 3
+            ),
+            // Metabolic rule 2
+            PlasmaRule (
+                id: 30,
                 references:[ Reference( hyperlink: "https://www.auanet.org/guidelines-and-quality/guidelines/testosterone-deficiency-guideline")],
                 authors: [Aksana],
                 biomarkerIds: [BiomarkerId.freeTestosteron, BiomarkerId.totalTestosterone,],
@@ -754,9 +789,9 @@ final class PlasmaEngine {
                 importance: 2
             ),
             
-            // Metabolic rule
+            // Metabolic rule 3
             PlasmaRule (
-                id: 30,
+                id: 31,
                 references:[Reference(hyperlink:  "https://journals.lww.com/hep/fulltext/2023/05000/aasld_practice_guidance_on_the_clinical_assessment.31.aspx"),],
                 authors: [Aksana],
                 biomarkerIds: [ BiomarkerId.alt, BiomarkerId.ast, BiomarkerId.triglycerides,  BiomarkerId.ldlCholesterol, BiomarkerId.glucose, BiomarkerId.hba1c, BiomarkerId.creatinine,],
@@ -786,9 +821,9 @@ final class PlasmaEngine {
                 message:" These findings may indicate a possible risk of Nonalcoholic Fatty Liver Disease (NAFLD) or related metabolic dysfunction. We recommend a thorough evaluation by your healthcare provider, which may include imaging (ultrasound, MRI) and lifestyle assessment. Early detection and management of NAFLD are crucial to preventing further complications and improving overall liver health.",
                 importance: 2
             ),
-            // Metabolic rule
+            // Metabolic rule 4
             PlasmaRule (
-                id: 31,
+                id: 32,
                 references: [Reference(hyperlink: "https://pubmed.ncbi.nlm.nih.gov/36510335/")],
                 authors: [Aksana],
                 biomarkerIds:  [BiomarkerId.vitaminD25Hydroxy,BiomarkerId.phosphorus,BiomarkerId.betaCrossLaps,BiomarkerId.osteocalcin, BiomarkerId.boneSpicificAlkalinePhosphatase,] ,
@@ -817,9 +852,9 @@ final class PlasmaEngine {
                 message: "The changes in your laboratory tests may suggest potential bone metabolism issues, such as osteoporosis or bone turnover disorders. This may indicate bone fragility or an increased risk of fractures. Timely assessment by an endocrinologist or a rheumatologist is essential for a full evaluation. Consider a bone density test (DEXA scan) to assess bone strength. To support bone health, ensure adequate intake of calcium, vitamin D, and magnesium. Weight-bearing exercises like walking or resistance training can help maintain bone mass. Limit alcohol consumption and avoid smoking, as these can negatively impact bone health. If diagnosed with osteoporosis or another bone disorder, discuss treatment options with your healthcare provider.",
                 importance: 2
             ),
-            // Metabolic rule
+            // Metabolic rule 5
             PlasmaRule (
-                id: 32,
+                id: 33,
                 references: [Reference(hyperlink: "https://www.oatext.com/pdf/IMM-2-137.pdf")],
                 authors: [Aksana],
                 biomarkerIds:  [BiomarkerId.alphaAmylase, BiomarkerId.lipase,] ,
@@ -840,9 +875,9 @@ final class PlasmaEngine {
                 message: "Your test results indicate elevated levels of alpha amylase or lipase, which are enzymes typically associated with pancreatic function. Elevated levels of these biomarkers may suggest a condition such as pancreatitis or other pancreatic disorders. It's important to consult with your healthcare provider for further assessment and potential diagnostic imaging. Additional tests may be recommended to assess the extent of pancreatic involvement and guide treatment options. Managing risk factors such as alcohol use, high-fat diet, and obesity can help maintain pancreatic health. In the case of pancreatitis, treatment may involve hospitalization, hydration, pain management, and dietary modifications.",
                 importance: 3
             ),
-            // Metabolic rule
+            // Metabolic rule 6
             PlasmaRule (
-                id: 33,
+                id: 34,
                 references: [Reference(hyperlink: "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/acid-base-regulation-and-disorders/metabolic-acidosis")],
                 authors: [Aksana],
                 biomarkerIds:  [BiomarkerId.ketones, BiomarkerId.anionGap,BiomarkerId.hba1c, BiomarkerId.glucose, BiomarkerId.lactate, BiomarkerId.creatinine, BiomarkerId.bloodUreaNitrogen] ,
