@@ -322,4 +322,13 @@ enum BiomarkerId {
     static let inhibinB = 74  // POSSIBLE WRONG MAPPING: Same ID as t3
     static let hdlCholesterol = 3
     static let platelets = 38
+    static let betaCrossLaps = 236
+    static let osteocalcin = 237
+    static let boneSpicificAlkalinePhosphatase = 238
+    static let alphaAmylase = 239
+    static let lipase = 240
+    static let ketones = 241
+    static let anionGap = 242
+    static let lactate = 243
+    static let bloodUreaNitrogen = 244
 }
